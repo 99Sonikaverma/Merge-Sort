@@ -1,0 +1,88 @@
+<script>
+
+function merge(array, l, m, o)
+{
+	var a1 = m - l + 1;
+	var a2 = o - m;
+
+	// Create temporary arrays
+	var Y = new Array(a1);
+	var Z = new Array(a2);
+
+	// Copy data to temp arrays Y[] and Z[]
+	for (var i = 0; i < a1; i++)
+		Y[i] = array[l + i];
+	for (var j = 0; j < a2; j++)
+		Z[j] = arr[m + 1 + j];
+
+	// Merge the temp arrays back into array[l..o]
+
+	// Initial index of first subarray
+	var i = 0;
+
+	// Initial index of second subarray
+	var j = 0;
+
+	// Initial index of merged subarray
+	var k = l;
+
+	while (i < a1 && j < a2) {
+		if (Y[i] <= Z[j]) {
+			array[k] = Y[i];
+			i++;
+		}
+		else {
+			array[k] = Z[j];
+			j++;
+		}
+		k++;
+	}
+
+	// Copy the remaining elements of
+	// Y[], if there are any
+	while (i < a1) {
+		array[k] = Y[i];
+		i++;
+		k++;
+	}
+
+	// Copy the remaining elements of
+	// Z[], if there are any
+	while (j < a2) {
+		array[k] = Z[j];
+		j++;
+		k++;
+	}
+}
+
+function mergeSort(arr,left, right){
+	if(left>=right){
+		return;//returns recursively
+	}
+	var m =left+ parseInt((right-left)/2);
+	mergeSort(arr,left,m);
+	mergeSort(arr,m+1,right);
+	merge(arr,left,m,right);
+}
+
+// UTILITY FUNCTIONS
+// Function to print an array
+function printArray( A, size)
+{
+	for (var i = 0; i < size; i++)
+	document.write( A[i] + " ");
+}
+
+
+var arr = [ 12, 11, 13, 5, 6, 7 ];
+	var arr_size = arr.length;
+
+	document.write( "Given array is <br>");
+	printArray(arr, arr_size);
+
+	mergeSort(arr, 0, arr_size - 1);
+
+	document.write( "<br>Sorted array is <br>");
+	printArray(arr, arr_size);
+
+</script>
